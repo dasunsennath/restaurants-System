@@ -16,6 +16,7 @@ const GetAllOrders = async (req, res, next) => {
     try {
         const result = await OrderModel.find({order_date :Today() })
         .populate('items.item_id')
+        .populate('items.item_id')
         .populate('items.selectedOptions');
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");

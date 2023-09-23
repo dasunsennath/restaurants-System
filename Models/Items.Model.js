@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const customizesSchema = require('./Customize.Model').schema;
 
 const ItemSchema = mongoose.Schema({
     title :  { type: String, required: true },
@@ -8,7 +7,11 @@ const ItemSchema = mongoose.Schema({
     imageURL :  { type: String, required: true },
     category :  {type: String, required: true},
     qty :  { type: Number, required: true },
-    customize : [customizesSchema],
+    customize : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Customize',
+        required : false      
+}],
 }, {timestamps: true});
 
 

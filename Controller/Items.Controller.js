@@ -1,8 +1,10 @@
 const ItemModel = require("../Models/Items.Model");
+const CustomizeModel = require("../Models/Customize.Model");
 
 const GetAllItems = async (req, res, next) => {
   try {
-    const result = await ItemModel.find({});
+    const result = await ItemModel.find({})
+    .populate('customize');
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json({
@@ -23,7 +25,8 @@ const GetAllItems = async (req, res, next) => {
 
 const GetItemById = async (req, res, next) => {
   try {
-    const result = await ItemModel.findById(req.params.id);
+    const result = await ItemModel.findById(req.params.id)
+    .populate('customize');
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json({
@@ -46,6 +49,7 @@ const CreateItem = async (req, res, next) => {
   try {
     const { title, description, price, imageURL, category, qty, customize } = req.body;
 
+    console.log(customize);
     const item = new ItemModel({
         title: title,
         description: description,
@@ -112,7 +116,8 @@ const UpdateItem = async (req, res, next) => {
 
 const DeleteItem = async (req, res, next) => {
     try {
-        const result = await ItemModel.findByIdAndDelete(req.params.id);
+        const result = await ItemModel.findByIdAndDelete(req.params.id)
+        .populate('customize');
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({

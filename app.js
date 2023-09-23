@@ -14,6 +14,7 @@ var cors = require('cors')
 // Routers
 const ItemsRouter = require('./Routers/Items.Router');
 const OrderRouter = require('./Routers/Order.Router');
+const CustomizeRouter = require('./Routers/Customize.Router');
 
 
 const app = express();
@@ -56,6 +57,7 @@ app.use(cors())
 
 app.use('/api/items', ItemsRouter);
 app.use('/api/orders', OrderRouter);
+app.use('/api/customize', CustomizeRouter);
 
 
 
