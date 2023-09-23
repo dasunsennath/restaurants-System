@@ -8,6 +8,7 @@ const  mongoose = require('mongoose');
 const  logger = require('morgan');
 var fs = require('fs')
 require('dotenv').config();
+var cors = require('cors')
 
 
 // Routers
@@ -48,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(cors())
 
 
 // Routes which should handle requests
