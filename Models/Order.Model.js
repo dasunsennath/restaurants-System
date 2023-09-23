@@ -36,7 +36,7 @@ const itemsSchema = mongoose.Schema({
                  ref : 'Item',
                   required : true },
     qty :  { type: Number, required: true },
-    menu_id : { type: Number, required: true },
+    menu_id : { type: Number, required: false },
     selectedOptions : [{
                 type : mongoose.Schema.Types.ObjectId,
                 ref : 'Customize',

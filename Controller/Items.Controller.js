@@ -1,5 +1,4 @@
 const ItemModel = require("../Models/Items.Model");
-const CustomizeModel = require("../Models/Customize.Model");
 
 const GetAllItems = async (req, res, next) => {
   try {

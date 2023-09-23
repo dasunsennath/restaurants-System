@@ -16,8 +16,35 @@ const GetAllOrders = async (req, res, next) => {
     try {
         const result = await OrderModel.find({order_date :Today() })
         .populate('items.item_id')
-        .populate('items.item_id')
+        .populate('items.item_id.customize')
         .populate('items.selectedOptions');
+          
+        // console.log("befor",result);
+        // result.forEach(element => {
+        //     let Total = 0;
+        //     element.items.forEach(item => {
+               
+                
+        //         Total += item.item_id.price * item.qty;
+
+        //         item.selectedOptions.forEach(option => {
+        //             Total += option.price;
+        //         });
+        //         //console.log(Total);
+
+        //     })
+        //     console.log(Total);
+        //     element["Amount"] = Total;
+        //     console.log("element",element);
+
+        // });
+        // console.log(Total);
+
+        // result.Total = Total;
+
+       // console.log("after",result);
+
+    
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({
