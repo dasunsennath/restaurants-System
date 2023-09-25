@@ -14,37 +14,24 @@ const Today = ()=>
 
 const GetAllOrders = async (req, res, next) => {
     try {
-        const result = await OrderModel.find({order_date :Today() })
-        .populate('items.item_id')
-        .populate('items.item_id.customize')
-        .populate('items.selectedOptions');
+        let result;
+        if("Status" in req.query)
+        {
+           status =  req.query.Status
+            result = await OrderModel.find({order_date :Today(),order_status:req.query.Status})
+            .populate('items.item_id')
+            .populate('items.item_id.customize')
+            .populate('items.selectedOptions');
+        }
+        else{
+            result = await OrderModel.find({order_date :Today()})
+            .populate('items.item_id')
+            .populate('items.item_id.customize')
+            .populate('items.selectedOptions');
+        }
+        //const result = await OrderModel.find({order_date :Today(),order_status:status})
+     
           
-        // console.log("befor",result);
-        // result.forEach(element => {
-        //     let Total = 0;
-        //     element.items.forEach(item => {
-               
-                
-        //         Total += item.item_id.price * item.qty;
-
-        //         item.selectedOptions.forEach(option => {
-        //             Total += option.price;
-        //         });
-        //         //console.log(Total);
-
-        //     })
-        //     console.log(Total);
-        //     element["Amount"] = Total;
-        //     console.log("element",element);
-
-        // });
-        // console.log(Total);
-
-        // result.Total = Total;
-
-       // console.log("after",result);
-
-    
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({
@@ -116,13 +103,14 @@ const CreateOrder = async (req, res, next) => {
 
 const UpdateOrder = async (req, res, next) => {
     try {
-        const {payment_method, items } = req.body;
+        const {payment_method, items,Status } = req.body;
         const order = await OrderModel.findByIdAndUpdate(
             req.params.id,
             {
                 $set: {
                     payment_method: payment_method,
                     items: items,
+                    order_status:Status
                 },
             },
             { new: true }
