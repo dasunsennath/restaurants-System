@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 const customizesSchema = mongoose.Schema({
-    option :  { type: String, required: true },
+    option :  { type: String, required: true , unique: true},
     price :  { type: Number, required: true },
 });
 

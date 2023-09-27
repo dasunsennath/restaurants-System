@@ -9,7 +9,7 @@ const OrderUUID =()=>{
 const OrderStatus  = {
     PENDING : "PENDING",
     CONFIRMED : "CONFIRMED",
-    PROCCESSING : "PROCCESSING",
+    PROCESSING : "PROCESSING",
     CANCELLED : "CANCELLED",
     COMPLETED : "COMPLETED",
 }
