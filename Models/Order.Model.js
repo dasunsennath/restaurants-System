@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
+const ShortUniqueId = require('short-unique-id');
+
+const uid = new ShortUniqueId({ length: 4 });
+//const { v4: uuidv4 } = require('uuid');
 const OrderUUID =()=>{
-   const ID =  uuidv4();
-    return `${ID}`;
+   const ID =  uid.rnd();
+    return `ORD${ID}`;
 }
 
 
@@ -47,7 +50,7 @@ const itemsSchema = mongoose.Schema({
 }, {timestamps: true});
 
 const OrderSchema = mongoose.Schema({
-    order_id : { type: String, required: true, unique: true , default: OrderUUID() },
+    order_id : { type: String, required: true, unique: true , default:OrderUUID() },
     order_status :  { type: String, required: true, enum: Object.values(OrderStatus),default: OrderStatus.PENDING },
     order_date: { type: String, required: true, default:Today() },
     payment_method :  { type: String, required: true, enum: Object.values(PaymentMethod),default: PaymentMethod.CASH },
