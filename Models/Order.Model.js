@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ShortUniqueId = require('short-unique-id');
 
-const uid = new ShortUniqueId({ length: 4 });
+const uid = new ShortUniqueId({ length: 4 , dictionary: "number"});
 //const { v4: uuidv4 } = require('uuid');
 const OrderUUID =()=>{
    const ID =  uid.rnd();
